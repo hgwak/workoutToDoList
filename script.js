@@ -10,20 +10,20 @@ function startApp() {
     SGT = new WorkoutTracker({
         addButton: $("#addButton"),
         cancelButton: $("#cancelButton"),
-        nameInput: $("#studentName"),
-        courseInput: $("#studentCourse"),
-        gradeInput: $("#studentGrade"),
+        workoutNameInput: $("#workoutName"),
+        setsInput: $("#sets"),
+        repsInput: $("#reps"),
         displayArea: $("#displayArea"),
-        averageArea: $(".avgGrade")
+        totalArea: $(".totalGrade")
     });
     SGT.addEventHandlers();
     addEventHandlers();
 }
 
 function addEventHandlers(){
-    $('.student-add-form').on('click',formValidator);
+    // $('.student-add-form').on('click',formValidator);
 }
 
 function formValidator(){
-    
+
 }

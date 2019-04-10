@@ -3,7 +3,7 @@
 
 class WorkoutTracker{
 	constructor( elementConfig ){
-		this.model = new WorkoutListHolder(); 
+		this.model = new WorkoutListHolder(this.displayTotal); 
 		this.elementConfig = elementConfig;
 		this.handleCancel = this.handleCancel.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
@@ -18,9 +18,9 @@ class WorkoutTracker{
 	}
 
 	clearInputs(){
-		this.elementConfig.nameInput.val('');
-		this.elementConfig.courseInput.val('');
-		this.elementConfig.gradeInput.val('');
+		this.elementConfig.workoutNameInput.val('');
+		this.elementConfig.setsInput.val('');
+		this.elementConfig.repsInput.val('');
 	}
 
 	handleCancel(){
@@ -28,26 +28,52 @@ class WorkoutTracker{
 	}
 	
 	handleAdd(){
-		var name = this.elementConfig.nameInput.val();
-		var course = this.elementConfig.courseInput.val();
-		var grade = this.elementConfig.gradeInput.val();
-		this.model.add(name, course, grade);
+		var workoutName = this.elementConfig.workoutNameInput.val();
+		var sets = this.elementConfig.setsInput.val();
+		var reps = this.elementConfig.repsInput.val();
+		if(this.hasErrors(workoutName, sets, reps)){
+			return;
+		};
+		this.model.add(workoutName, sets, reps);
 		this.clearInputs();
 		this.displayAll();
 	}
 	
+	hasErrors=(workoutName, sets, reps)=>{
+		var errorCount = 0;
+		if (workoutName.length<2 || !isNaN(workoutName)){
+			$('.workoutCheck').show();
+			errorCount++
+		}else{
+			$('.workoutCheck').hide();
+		}
+		if (isNaN(sets) || sets.length===0){
+			$('.setsCheck').show();
+			errorCount++
+		} else {
+			$('.setsCheck').hide();
+		}
+		if (isNaN(reps) || reps.length===0) {
+			$('.repsCheck').show();
+			errorCount++
+		} else {
+			$('.repstCheck').hide();
+		}
+		return errorCount ? true:false
+	}
+
 	displayAll(){
 		this.elementConfig.displayArea.empty();
 		var allWorkouts = this.model.records;
 		for(var arrayIndex = 0; arrayIndex < allWorkouts.length;arrayIndex++ ){
 			this.model.records[arrayIndex].render();
 		}
-		this.displayAverage();
+		this.displayTotal();
 	}
 	
-	displayAverage(){
-		var average = this.model.calculateGradeAverage()
-		this.elementConfig.averageArea.text(average);
+	displayTotal=()=>{
+		var total = this.model.calculateTotal();
+		this.elementConfig.totalArea.text(total);
 		return;
 	}
 }

@@ -1,19 +1,20 @@
 
 
 class WorkoutRecord{
-	constructor(id, name, course, grade, deleteCallback=()=>{}){//es6
+	constructor(id, workoutName, sets, reps, deleteCallback=()=>{}, countCallback=()=>{}){//es6
 		this.data = {
 			id: id,
-			name: name,
-			course: course,
-			grade: parseInt(grade)
+			workoutName: workoutName,
+			sets: parseInt(sets),
+			reps: parseInt(reps)
 		}
 		this.deleteCallback = deleteCallback;
+		this.countCallback = countCallback;
 		this.domElements = {
 			row: null,
-			name: null,
-			course: null,
-			grade: null,
+			workoutName: null,
+			sets: null,
+			reps: null,
 			operations: null,
 			deleteButton: null
 		}
@@ -36,9 +37,9 @@ class WorkoutRecord{
 	
 	render(){
 		this.domElements.row = $('<tr>');
-		this.domElements.name = $('<td>').addClass('text-center').text(this.data.name);
-		this.domElements.course = $('<td>').addClass('text-center').text(this.data.course);
-		this.domElements.grade = $('<td>').addClass('text-center').text(this.data.grade);
+		this.domElements.name = $('<td>').addClass('text-center').text(this.data.workoutName);
+		this.domElements.course = $('<td>').addClass('text-center').text(this.data.sets);
+		this.domElements.grade = $('<td>').addClass('text-center').text(this.data.reps);
 		this.deleteButtonSection = $('<td>').addClass('d-flex justify-content-center');
 		this.deleteButtonDOM = $('<button>').addClass('btn btn-danger').text('delete');
 		$(this.deleteButtonDOM).click(this.handleDelete);
@@ -50,6 +51,8 @@ class WorkoutRecord{
 	
 	handleDelete(){
 		this.deleteCallback(this);
-		return this.domElements.row.remove();
+		this.domElements.row.remove();
+		this.countCallback();
+		return;
 	}
 }

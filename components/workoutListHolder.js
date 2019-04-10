@@ -1,7 +1,8 @@
 
 
 class WorkoutListHolder{
-	constructor(){
+	constructor(countCallback=()=>{}){
+		this.countCallback = countCallback;
 		this.records=[];
 		this.currentID = 0;
 		this.remove = this.remove.bind(this);
@@ -12,8 +13,8 @@ class WorkoutListHolder{
 		return this.currentID;
 	}
 	
-	add( name, course, grade ){
-		var addWorkout = new WorkoutRecord(this.getNextID(), name, course, grade,this.remove);
+	add( workoutName, sets, reps ){
+		var addWorkout = new WorkoutRecord(this.getNextID(), workoutName, sets, reps, this.remove, this.countCallback);
 		this.records.push(addWorkout);
 		return this.records.length;
 
@@ -48,19 +49,16 @@ class WorkoutListHolder{
 		return -1;
 	}
 	
-	//Take this out****
-	calculateGradeAverage(){
-		var sumGrade=0;
-		var count=0;
+	calculateTotal=()=>{
+		var sumSets=0;
 		for(var arrayIndex = 0; arrayIndex < this.records.length; arrayIndex++){
-			var currentStudentGrade = this.records[arrayIndex].data.grade;
-			sumGrade += currentStudentGrade;
-			count++;
+			var currentSetCount = this.records[arrayIndex].data.sets;
+			sumSets += currentSetCount;
 		}
 		if(this.records.length===0){
 			return 0;
 		}else{
-			return sumGrade/count;
+			return sumSets;
 		}
 	}
 }
