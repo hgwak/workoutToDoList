@@ -25,8 +25,10 @@ function addEventHandlers(){
         if(!timerFlag){
             startTimer();
             timerFlag = true;
+        }else{
+            pauseFlag = !pauseFlag;
         }
     })
 }
-
+var pauseFlag = false;
 var timerFlag = false;
