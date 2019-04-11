@@ -21,9 +21,12 @@ function startApp() {
 }
 
 function addEventHandlers(){
-    // $('.student-add-form').on('click',formValidator);
+    $('.timer').on('click', function(){
+        if(!timerFlag){
+            startTimer();
+            timerFlag = true;
+        }
+    })
 }
 
-function formValidator(){
-
-}
+var timerFlag = false;

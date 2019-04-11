@@ -21,6 +21,7 @@ class WorkoutTracker{
 		this.elementConfig.workoutNameInput.val('');
 		this.elementConfig.setsInput.val('');
 		this.elementConfig.repsInput.val('');
+		$('.invalid-feedback').hide();
 	}
 
 	handleCancel(){
