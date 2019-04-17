@@ -14,6 +14,7 @@ class WorkoutTracker{
 		var addButton = this.elementConfig.addButton;
 		var cancelButton = this.elementConfig.cancelButton;
 		addButton.on('click',this.handleAdd);
+		$('form').on('keypress', this.handleAdd);
 		cancelButton.on('click',this.handleCancel);
 	}
 
@@ -28,16 +29,19 @@ class WorkoutTracker{
 		this.clearInputs();
 	}
 	
-	handleAdd(){
-		var workoutName = this.elementConfig.workoutNameInput.val();
-		var sets = this.elementConfig.setsInput.val();
-		var reps = this.elementConfig.repsInput.val();
-		if(this.hasErrors(workoutName, sets, reps)){
-			return;
-		};
-		this.model.add(workoutName, sets, reps);
-		this.clearInputs();
-		this.displayAll();
+	handleAdd(event){
+		if(event.which===13 || event.type==='click'){
+			var workoutName = this.elementConfig.workoutNameInput.val();
+			var sets = this.elementConfig.setsInput.val();
+			var reps = this.elementConfig.repsInput.val();
+			if (this.hasErrors(workoutName, sets, reps)) {
+				return;
+			};
+			this.model.add(workoutName, sets, reps);
+			this.clearInputs();
+			this.displayAll();
+			$('#addWorkout').click();
+		}
 	}
 	
 	hasErrors=(workoutName, sets, reps)=>{
@@ -58,7 +62,7 @@ class WorkoutTracker{
 			$('.repsCheck').show();
 			errorCount++
 		} else {
-			$('.repstCheck').hide();
+			$('.repsCheck').hide();
 		}
 		return errorCount ? true:false
 	}

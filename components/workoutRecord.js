@@ -36,7 +36,7 @@ class WorkoutRecord{
 	}
 	
 	render(){
-		this.domElements.row = $('<tr>');
+		this.domElements.row = $('<tr>').addClass('add-border');
 		this.domElements.name = $('<td>').addClass('text-center').text(this.data.workoutName);
 		this.domElements.course = $('<td>').addClass('text-center').text(this.data.sets);
 		this.domElements.grade = $('<td>').addClass('text-center').text(this.data.reps);
