@@ -1,7 +1,7 @@
 
 
 class WorkoutRecord{
-	constructor(id, workoutName, sets, reps, deleteCallback=()=>{}, countCallback=()=>{}, editFormCallback=()=>{}){//es6
+	constructor(id, workoutName, sets, reps, deleteCallback=()=>{}, countCallback=()=>{}){//es6
 		this.data = {
 			id: id,
 			workoutName: workoutName,
@@ -10,7 +10,6 @@ class WorkoutRecord{
 		};
 		this.deleteCallback = deleteCallback;
 		this.countCallback = countCallback;
-		this.editFormCallback = editFormCallback;
 		this.domElements = {
 			row: null,
 			workoutName: null,

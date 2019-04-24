@@ -1,8 +1,7 @@
 
 
 class WorkoutListHolder{
-	constructor(countCallback=()=>{}, editFormCallback=()=>{}){
-		this.editFormCallBack = editFormCallback;
+	constructor(countCallback=()=>{}){
 		this.countCallback = countCallback;
 		this.records=[];
 		this.currentID = 0;
