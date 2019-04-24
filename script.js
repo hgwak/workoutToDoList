@@ -1,18 +1,21 @@
 $(document).ready(startApp);
 
-var SGT;
+var workoutList;
 function startApp() {
-    SGT = new WorkoutTracker({
-        editButton: $('.edit-form'),
+    workoutList = new WorkoutTracker({
+        editButton: $("#editButton"),
         addButton: $("#addButton"),
-        cancelButton: $("#cancelButton"),
+        cancelButton: $(".cancelButton"),
         workoutNameInput: $("#workoutName"),
+        editWorkoutName: $("#editWorkoutName"),
         setsInput: $("#sets"),
+        editSets: $("#editSets"),
+        editReps: $("#editReps"),
         repsInput: $("#reps"),
         displayArea: $("#displayArea"),
         totalSets: $(".totalSets")
     });
-    SGT.addEventHandlers();
+    workoutList.addEventHandlers();
     addEventHandlers();
 }
 
@@ -29,7 +32,9 @@ function addEventHandlers(){
     })
     $('.reset').on('click', resetTimer);
     $('.dropdown-item').on('click', setTimer)
+
 }
 
+var editID;
 var pauseFlag = false;
 var timerFlag = false;

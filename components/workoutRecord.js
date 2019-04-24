@@ -1,15 +1,16 @@
 
 
 class WorkoutRecord{
-	constructor(id, workoutName, sets, reps, deleteCallback=()=>{}, countCallback=()=>{}){//es6
+	constructor(id, workoutName, sets, reps, deleteCallback=()=>{}, countCallback=()=>{}, editFormCallback=()=>{}){//es6
 		this.data = {
 			id: id,
 			workoutName: workoutName,
 			sets: parseInt(sets),
 			reps: parseInt(reps)
-		}
+		};
 		this.deleteCallback = deleteCallback;
 		this.countCallback = countCallback;
+		this.editFormCallback = editFormCallback;
 		this.domElements = {
 			row: null,
 			workoutName: null,
@@ -37,7 +38,6 @@ class WorkoutRecord{
 
 	toggleComplete(){
 		$(this).toggleClass('btn-danger btn-primary');
-		// $(this).toggleClass('btn-primary');
 		let textToggle = $(this).text()
 		$(this).text(
 			textToggle === "Incomplete" ? "Complete" : "Incomplete"
@@ -53,7 +53,7 @@ class WorkoutRecord{
 		this.domElements.reps = $('<td>').addClass('text-center').text(this.data.reps);
 		this.deleteButtonSection = $('<td>').addClass('d-flex justify-content-center');
 		this.deleteButtonDOM = $('<button>').addClass('btn btn-danger').text('X');
-		this.editButtonDOM = $('<button data-toggle="modal" data-target="#editWorkout">').addClass('btn btn-info mr-1 editForm').text('Edit');
+		this.editButtonDOM = $('<button data-toggle="modal" data-target="#editWorkout">').addClass('btn btn-info mr-1 editForm').text('Edit').on('click', this.handleEdit);
 		$(this.deleteButtonDOM).click(this.handleDelete);
 		this.domElements.deleteButton = $(this.deleteButtonSection).append(this.editButtonDOM,this.deleteButtonDOM);
 		this.newTable = $(this.domElements.row).append(this.domElements.checkBoxHolder, this.domElements.name,this.domElements.sets, this.domElements.reps, this.domElements.deleteButton);
@@ -61,8 +61,11 @@ class WorkoutRecord{
 		return this.domElements.row;
 	}
 	
-	handleEdit(){
-		
+	handleEdit = () => {
+		editID = this.data.id;
+		$('#editWorkoutName').val(this.data.workoutName);
+		$('#editSets').val(this.data.sets);
+		$('#editReps').val(this.data.reps);
 	}
 
 	handleDelete(){

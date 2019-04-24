@@ -104,7 +104,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="cancel btn btn-danger" id="cancelButton">Clear</button>
+                    <button type="button" class="cancel btn btn-danger cancelButton">Clear</button>
                     <button type="button" class="btn btn-primary" id="addButton">Add Workout</button>
                 </div>
             </div>
@@ -126,7 +126,7 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-user"> </span>
                             </span>
-                            <input type="text" class="form-control form-rounded" name="workoutName" id="workoutName"
+                            <input type="text" class="form-control form-rounded" name="editWorkoutName" id="editWorkoutName"
                                 placeholder="Workout Name" required>
                             <div class="invalid-feedback workoutCheck">
                                 Please enter more than 2 letters.
@@ -136,7 +136,7 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-list-alt"> </span>
                             </span>
-                            <input type="text" autocomplete="off" class="form-control form-rounded" name="sets" id="sets"
+                            <input type="text" autocomplete="off" class="form-control form-rounded" name="editSets" id="editSets"
                                 placeholder="# of Sets" required>
                             <div class="invalid-feedback setsCheck">
                                 Please enter a number.
@@ -146,7 +146,7 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-education"> </span>
                             </span>
-                            <input type="text" class="form-control form-rounded" name="reps" id="reps"
+                            <input type="text" class="form-control form-rounded" name="editReps" id="editReps"
                                 placeholder="# of Reps" required>
                             <div class="invalid-feedback repsCheck">
                                 Please enter a number.
@@ -156,7 +156,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="cancel btn btn-danger" id="cancelButton">Clear</button>
+                    <button type="button" class="cancel btn btn-danger cancelButton">Clear</button>
                     <button type="button" class="btn btn-primary" id="editButton">Finish Edit</button>
                 </div>
             </div>

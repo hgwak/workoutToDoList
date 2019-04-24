@@ -3,7 +3,7 @@
 
 class WorkoutTracker{
 	constructor( elementConfig ){
-		this.model = new WorkoutListHolder(this.displayTotal); 
+		this.model = new WorkoutListHolder(this.displayTotal, this.editForms); 
 		this.elementConfig = elementConfig;
 		this.handleCancel = this.handleCancel.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
@@ -12,34 +12,23 @@ class WorkoutTracker{
 
 	addEventHandlers(){
 		var addButton = this.elementConfig.addButton;
-		var editButton = this.elementConfig.editButton;
 		var cancelButton = this.elementConfig.cancelButton;
+		var editButton = this.elementConfig.editButton
 		addButton.on('click',this.handleAdd);
 		$('.student-add-form').on('keypress', this.handleAdd);
 		cancelButton.on('click',this.handleCancel);
-		$('.student-edit-form').on('keypress', this.handleEdit);
-		editButton.on('click',this.handleEdit);
+		editButton.on('click', this.editForms);
+		$('.student-edit-form').on('keypress', this.editForms);
 	}
 
 	clearInputs=()=>{
 		this.elementConfig.workoutNameInput.val('');
 		this.elementConfig.setsInput.val('');
 		this.elementConfig.repsInput.val('');
+		this.elementConfig.editWorkoutName.val('');
+		this.elementConfig.editSets.val('');
+		this.elementConfig.editReps.val('');
 		$('.invalid-feedback').hide();
-	}
-
-	handleEdit=(event)=>{
-		if (event.which === 13 || event.type === 'click') {
-			var workoutName = this.elementConfig.workoutNameInput.val();
-			var sets = this.elementConfig.setsInput.val();
-			var reps = this.elementConfig.repsInput.val();
-			if (this.hasErrors(workoutName, sets, reps)) {
-				return;
-			};
-			this.clearInputs();
-			this.displayAll();
-			$('#editWorkout').click();
-		}
 	}
 
 	handleCancel(){
@@ -61,6 +50,28 @@ class WorkoutTracker{
 		}
 	}
 	
+	editForms = (event) => {
+		if(event.which===13 || event.type === 'click'){
+			var workoutName = this.elementConfig.editWorkoutName.val();
+			var sets = this.elementConfig.editSets.val();
+			var reps = this.elementConfig.editReps.val();
+			if(this.hasErrors(workoutName, sets, reps)){
+				return;
+			}
+			for(var i = 0; i < this.model.records.length; i++){
+				if(editID === this.model.records[i].data.id){
+					this.model.records[i].update('workoutName', workoutName);
+					this.model.records[i].update('sets', sets);
+					this.model.records[i].update('reps', reps);
+					break;
+				}
+			}
+			this.clearInputs();
+			this.displayAll();
+			$('#editWorkout').click();
+		}
+	}
+
 	hasErrors=(workoutName, sets, reps)=>{
 		var errorCount = 0;
 		if (workoutName.length<2 || !isNaN(workoutName)){

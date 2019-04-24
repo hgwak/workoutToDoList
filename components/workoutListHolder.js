@@ -1,7 +1,8 @@
 
 
 class WorkoutListHolder{
-	constructor(countCallback=()=>{}){
+	constructor(countCallback=()=>{}, editFormCallback=()=>{}){
+		this.editFormCallBack = editFormCallback;
 		this.countCallback = countCallback;
 		this.records=[];
 		this.currentID = 0;
@@ -14,7 +15,7 @@ class WorkoutListHolder{
 	}
 	
 	add( workoutName, sets, reps ){
-		var addWorkout = new WorkoutRecord(this.getNextID(), workoutName, sets, reps, this.remove, this.countCallback);
+		var addWorkout = new WorkoutRecord(this.getNextID(), workoutName, sets, reps, this.remove, this.countCallback, this.editFormCallBack);
 		this.records.push(addWorkout);
 		return this.records.length;
 
