@@ -20,10 +20,12 @@ function startTimer() {
     }
     
     if(presentTime==="0:00"){
+        alert('REST TIME OVER!')
         timerFlag=false;
         resetTimer();
     }
 }
+
 function checkSecond(sec) {
     if (sec < 10 && sec >= 0) { sec = "0" + sec }; // add zero in front of numbers < 10
     if (sec < 0) { sec = "59" };
@@ -37,6 +39,12 @@ function resetTimer(){
 }
 
 function setTimer(){
+    if(!timerFlag){
+        pauseFlag = false;
+    }else{
+        pauseFlag=true;
+    }
+    $('.startStop').text('Start');
     let newTime = $(this).text();
     defaultTime = newTime;
     $('.timer').text(newTime);

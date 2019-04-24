@@ -25,10 +25,10 @@ class WorkoutListHolder{
 			return false;
 		}else{
 			var remove_workout_id = removeWorkoutRecord.data.id;
-			for(var recordIndex = 0; recordIndex < this.records.length; recordIndex++){
+			for (var recordIndex = 0; recordIndex < this.records.length; recordIndex++) {
 				var currentWorkoutList = this.records[recordIndex].data.id;
-				if(remove_workout_id === currentWorkoutList){
-					this.records.splice(recordIndex,1);
+				if (remove_workout_id === currentWorkoutList) {
+					this.records.splice(recordIndex, 1);
 					return true;
 				}
 			}

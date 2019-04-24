@@ -52,18 +52,28 @@ class WorkoutRecord{
 		this.domElements.sets = $('<td>').addClass('text-center').text(this.data.sets);
 		this.domElements.reps = $('<td>').addClass('text-center').text(this.data.reps);
 		this.deleteButtonSection = $('<td>').addClass('d-flex justify-content-center');
-		this.deleteButtonDOM = $('<button>').addClass('btn btn-danger').text('Delete');
+		this.deleteButtonDOM = $('<button>').addClass('btn btn-danger').text('X');
+		this.editButtonDOM = $('<button data-toggle="modal" data-target="#editWorkout">').addClass('btn btn-info mr-1 editForm').text('Edit');
 		$(this.deleteButtonDOM).click(this.handleDelete);
-		this.domElements.deleteButton = $(this.deleteButtonSection).append(this.deleteButtonDOM);
+		this.domElements.deleteButton = $(this.deleteButtonSection).append(this.editButtonDOM,this.deleteButtonDOM);
 		this.newTable = $(this.domElements.row).append(this.domElements.checkBoxHolder, this.domElements.name,this.domElements.sets, this.domElements.reps, this.domElements.deleteButton);
 		$('tbody').append(this.newTable);
 		return this.domElements.row;
 	}
 	
+	handleEdit(){
+		
+	}
+
 	handleDelete(){
-		this.deleteCallback(this);
-		this.domElements.row.remove();
-		this.countCallback();
-		return;
+		let deleteConfirm = confirm('Are you sure you want to remove this workout?');
+		if(deleteConfirm){
+			this.deleteCallback(this);
+			this.domElements.row.remove();
+			this.countCallback();
+			return;
+		}else{
+			return;
+		}
 	}
 }

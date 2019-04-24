@@ -2,12 +2,8 @@ $(document).ready(startApp);
 
 var SGT;
 function startApp() {
-	/*
-	startTests will test your code.  Once it works, 
-	delete startTests and uncomment the code below to run YOUR code and test it
-	*/
-    // startTests();
     SGT = new WorkoutTracker({
+        editButton: $('.edit-form'),
         addButton: $("#addButton"),
         cancelButton: $("#cancelButton"),
         workoutNameInput: $("#workoutName"),
@@ -33,14 +29,7 @@ function addEventHandlers(){
     })
     $('.reset').on('click', resetTimer);
     $('.dropdown-item').on('click', setTimer)
-    $('.completed-check').on('click', toggleComplete);
 }
-
-function toggleComplete(){
-    
-}
-
-
 
 var pauseFlag = false;
 var timerFlag = false;

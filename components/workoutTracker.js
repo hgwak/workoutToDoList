@@ -12,17 +12,34 @@ class WorkoutTracker{
 
 	addEventHandlers(){
 		var addButton = this.elementConfig.addButton;
+		var editButton = this.elementConfig.editButton;
 		var cancelButton = this.elementConfig.cancelButton;
 		addButton.on('click',this.handleAdd);
-		$('form').on('keypress', this.handleAdd);
+		$('.student-add-form').on('keypress', this.handleAdd);
 		cancelButton.on('click',this.handleCancel);
+		$('.student-edit-form').on('keypress', this.handleEdit);
+		editButton.on('click',this.handleEdit);
 	}
 
-	clearInputs(){
+	clearInputs=()=>{
 		this.elementConfig.workoutNameInput.val('');
 		this.elementConfig.setsInput.val('');
 		this.elementConfig.repsInput.val('');
 		$('.invalid-feedback').hide();
+	}
+
+	handleEdit=(event)=>{
+		if (event.which === 13 || event.type === 'click') {
+			var workoutName = this.elementConfig.workoutNameInput.val();
+			var sets = this.elementConfig.setsInput.val();
+			var reps = this.elementConfig.repsInput.val();
+			if (this.hasErrors(workoutName, sets, reps)) {
+				return;
+			};
+			this.clearInputs();
+			this.displayAll();
+			$('#editWorkout').click();
+		}
 	}
 
 	handleCancel(){
