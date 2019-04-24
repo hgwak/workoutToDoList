@@ -18,7 +18,7 @@ class WorkoutRecord{
 			operations: null,
 			deleteButton: null
 		}
-		this.handleDelete = this.handleDelete.bind( this );
+		this.handleDelete = this.handleDelete.bind(this);
 	}
 
 	update(changeValue, newValue ){
@@ -34,17 +34,28 @@ class WorkoutRecord{
 	getData(){
 		return this.data;
 	}
+
+	toggleComplete(){
+		$(this).toggleClass('btn-danger btn-primary');
+		// $(this).toggleClass('btn-primary');
+		let textToggle = $(this).text()
+		$(this).text(
+			textToggle === "Incomplete" ? "Complete" : "Incomplete"
+		);
+	}
 	
 	render(){
 		this.domElements.row = $('<tr>').addClass('add-border');
+		this.domElements.checkBox = $('<button>').addClass('btn btn-danger completed-check').text('Incomplete').on('click', this.toggleComplete);
+		this.domElements.checkBoxHolder = $('<td>').addClass('d-flex justify-content-center col').append(this.domElements.checkBox)
 		this.domElements.name = $('<td>').addClass('text-center').text(this.data.workoutName);
-		this.domElements.course = $('<td>').addClass('text-center').text(this.data.sets);
-		this.domElements.grade = $('<td>').addClass('text-center').text(this.data.reps);
+		this.domElements.sets = $('<td>').addClass('text-center').text(this.data.sets);
+		this.domElements.reps = $('<td>').addClass('text-center').text(this.data.reps);
 		this.deleteButtonSection = $('<td>').addClass('d-flex justify-content-center');
-		this.deleteButtonDOM = $('<button>').addClass('btn btn-danger').text('delete');
+		this.deleteButtonDOM = $('<button>').addClass('btn btn-danger').text('Delete');
 		$(this.deleteButtonDOM).click(this.handleDelete);
 		this.domElements.deleteButton = $(this.deleteButtonSection).append(this.deleteButtonDOM);
-		this.newTable = $(this.domElements.row).append(this.domElements.name,this.domElements.course,this.domElements.grade,this.domElements.deleteButton);
+		this.newTable = $(this.domElements.row).append(this.domElements.checkBoxHolder, this.domElements.name,this.domElements.sets, this.domElements.reps, this.domElements.deleteButton);
 		$('tbody').append(this.newTable);
 		return this.domElements.row;
 	}

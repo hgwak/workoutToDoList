@@ -4,6 +4,10 @@
     border-top:0px;
 }
 
+.timer{
+    margin-bottom:5px;
+}
+
 #displayArea .add-border{
     border-bottom:1px solid#dee2e6;
 }

@@ -1,3 +1,4 @@
+var defaultTime = '3:00'
 
 function startTimer() {
     var presentTime = $('.timer').text();
@@ -5,7 +6,6 @@ function startTimer() {
     var m = timeArray[0];
     var s = checkSecond((timeArray[1] - 1));
     if (s == 59) { m = m - 1 }
-    //if(m<0){alert('timer completed')}
     $('.timer').text(m + ":" + s);
     
     if(presentTime!=="0:00"){
@@ -30,10 +30,14 @@ function checkSecond(sec) {
     return sec;
 }
 
-function pauseTimer(){
-
+function resetTimer(){
+    pauseFlag=true;
+    $('.timer').text(defaultTime)
+    $('.startStop').text('Start');
 }
 
-function resetTimer(){
-    $('.timer').text('3:00')
+function setTimer(){
+    let newTime = $(this).text();
+    defaultTime = newTime;
+    $('.timer').text(newTime);
 }

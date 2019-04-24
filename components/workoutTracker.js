@@ -78,7 +78,7 @@ class WorkoutTracker{
 	
 	displayTotal=()=>{
 		var total = this.model.calculateTotal();
-		this.elementConfig.totalArea.text(total);
+		this.elementConfig.totalSets.text(total);
 		return;
 	}
 }

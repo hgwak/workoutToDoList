@@ -14,21 +14,33 @@ function startApp() {
         setsInput: $("#sets"),
         repsInput: $("#reps"),
         displayArea: $("#displayArea"),
-        totalArea: $(".totalGrade")
+        totalSets: $(".totalSets")
     });
     SGT.addEventHandlers();
     addEventHandlers();
 }
 
 function addEventHandlers(){
-    $('.timer').on('click', function(){
+    $('.startStop').on('click', function(){
         if(!timerFlag){
             startTimer();
             timerFlag = true;
+            $('.startStop').text('Stop');
         }else{
             pauseFlag = !pauseFlag;
+            $('.startStop').text('Start');
         }
     })
+    $('.reset').on('click', resetTimer);
+    $('.dropdown-item').on('click', setTimer)
+    $('.completed-check').on('click', toggleComplete);
 }
+
+function toggleComplete(){
+    
+}
+
+
+
 var pauseFlag = false;
 var timerFlag = false;
