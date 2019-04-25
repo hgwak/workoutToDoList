@@ -44,6 +44,7 @@ class WorkoutRecord{
 		targetElement.nextElementSibling.nextElementSibling.classList.add("strikeout");
 		targetElement.nextElementSibling.nextElementSibling.nextElementSibling.classList.add("strikeout");
 		targetElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.childNodes[0].classList.add("strikeout");
+		targetElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.childNodes[0].removeAttribute('data-toggle');
 		$(event.target).addClass('btn-primary');
 		$(event.target).removeClass('btn-danger');
 		$(event.target).text("Complete");

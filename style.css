@@ -30,7 +30,7 @@
     }
 }
 
-.strikeout{
+.strikeout, .strikeout:hover{
     text-decoration:line-through;
 }
 
