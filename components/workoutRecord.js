@@ -6,7 +6,8 @@ class WorkoutRecord{
 			id: id,
 			workoutName: workoutName,
 			sets: parseInt(sets),
-			reps: parseInt(reps)
+			reps: parseInt(reps),
+			complete: "Incomplete"
 		};
 		this.deleteCallback = deleteCallback;
 		this.countCallback = countCallback;
@@ -18,6 +19,7 @@ class WorkoutRecord{
 			operations: null,
 			deleteButton: null
 		}
+		this.completeSets = this.completeSets.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
 	}
 
@@ -35,17 +37,33 @@ class WorkoutRecord{
 		return this.data;
 	}
 
-	toggleComplete(){
-		$(this).toggleClass('btn-danger btn-primary');
-		let textToggle = $(this).text()
-		$(this).text(
-			textToggle === "Incomplete" ? "Complete" : "Incomplete"
-		);
+	toggleComplete=(event)=>{
+		console.log(event)
+		let targetElement = event.currentTarget.parentElement;
+		targetElement.nextElementSibling.classList.add("strikeout");
+		targetElement.nextElementSibling.nextElementSibling.classList.add("strikeout");
+		targetElement.nextElementSibling.nextElementSibling.nextElementSibling.classList.add("strikeout");
+		targetElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.childNodes[0].classList.add("strikeout");
+		$(event.target).addClass('btn-primary');
+		$(event.target).removeClass('btn-danger');
+		$(event.target).text("Complete");
+		if($(event.target).text()=== "Complete"){
+			this.data.complete = "Complete"
+			this.completeSets();
+		}
+	}
+
+	completeSets=()=>{
+		this.update('sets',0);
+		this.countCallback();
 	}
 	
 	render(){
 		this.domElements.row = $('<tr>').addClass('add-border');
-		this.domElements.checkBox = $('<button>').addClass('btn btn-danger completed-check').text('Incomplete').on('click', this.toggleComplete);
+		this.domElements.checkBox = $('<button>').addClass('btn btn-danger completed-check').text(this.data.complete).on('click', this.toggleComplete);
+		if(this.data.complete==="Complete"){
+			this.domElements.checkBox.toggleClass('btn-danger btn-primary')
+		}
 		this.domElements.checkBoxHolder = $('<td>').addClass('d-flex justify-content-center col').append(this.domElements.checkBox)
 		this.domElements.name = $('<td>').addClass('text-center').text(this.data.workoutName);
 		this.domElements.sets = $('<td>').addClass('text-center').text(this.data.sets);
