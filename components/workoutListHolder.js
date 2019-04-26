@@ -1,5 +1,3 @@
-
-
 class WorkoutListHolder{
 	constructor(countCallback=()=>{}){
 		this.countCallback = countCallback;

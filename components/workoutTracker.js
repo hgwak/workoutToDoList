@@ -1,6 +1,3 @@
-
-
-
 class WorkoutTracker{
 	constructor( elementConfig ){
 		this.model = new WorkoutListHolder(this.displayTotal, this.editForms); 
@@ -61,7 +58,7 @@ class WorkoutTracker{
 			for(var i = 0; i < this.model.records.length; i++){
 				if(editID === this.model.records[i].data.id){
 					this.model.records[i].update('workoutName', workoutName);
-					this.model.records[i].update('sets', sets);
+					this.model.records[i].data.sets=sets;
 					this.model.records[i].update('reps', reps);
 					break;
 				}
