@@ -15,9 +15,8 @@ class WorkoutListHolder{
 		var addWorkout = new WorkoutRecord(this.getNextID(), workoutName, sets, reps, this.remove, this.countCallback, this.editFormCallBack);
 		this.records.push(addWorkout);
 		return this.records.length;
-
 	}
-	
+
 	remove( removeWorkoutRecord ){
 		if(typeof(removeWorkoutRecord)!=='object'){
 			return false;
@@ -27,6 +26,7 @@ class WorkoutListHolder{
 				var currentWorkoutList = this.records[recordIndex].data.id;
 				if (remove_workout_id === currentWorkoutList) {
 					this.records.splice(recordIndex, 1);
+					localStorage.records = JSON.stringify(this.model.records);
 					return true;
 				}
 			}

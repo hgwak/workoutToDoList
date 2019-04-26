@@ -60,7 +60,11 @@
         <tbody id="displayArea">
         </tbody>
     </table>
-    <button type="button" class="btn btn-primary btn-lg btn-block col-8 offset-2" data-toggle="modal" data-target="#addWorkout">Add a Workout</button>
+    <div class="col-8 offset-2">
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addWorkout">Add a Workout</button>
+        <button type="button" class='btn btn-info btn-block loadWorkout'>Load Previous Workout</button>
+        <button type="button" class='btn btn-info btn-block saveWorkout mb-2'>Save Workout</button>
+    </div>
     <div class="modal fade" id="addWorkout" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

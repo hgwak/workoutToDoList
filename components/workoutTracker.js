@@ -4,7 +4,6 @@ class WorkoutTracker{
 		this.elementConfig = elementConfig;
 		this.handleCancel = this.handleCancel.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
-		
 	}
 
 	addEventHandlers(){
@@ -16,6 +15,22 @@ class WorkoutTracker{
 		cancelButton.on('click',this.handleCancel);
 		editButton.on('click', this.editForms);
 		$('.student-edit-form').on('keypress', this.editForms);
+		$('.loadWorkout').on('click', this.loadRecords);
+		$('.saveWorkout').on('click', this.updateLocalStorageRecords)
+	}
+
+	loadRecords=()=>{
+		let localStorageRecords = JSON.parse(localStorage.records)
+		if(!!localStorageRecords && localStorageRecords.length !== this.model.records.length){
+			localStorageRecords.forEach((item) => {
+				this.model.add(item.data.workoutName, item.data.sets, item.data.reps)
+			})
+		}
+		this.displayAll();
+	}
+
+	updateLocalStorageRecords = () => {
+		localStorage.records = JSON.stringify(this.model.records);
 	}
 
 	clearInputs=()=>{
@@ -46,7 +61,7 @@ class WorkoutTracker{
 			$('#addWorkout').click();
 		}
 	}
-	
+
 	editForms = (event) => {
 		if(event.which===13 || event.type === 'click'){
 			var workoutName = this.elementConfig.editWorkoutName.val();

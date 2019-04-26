@@ -45,6 +45,10 @@
     border-bottom:1px solid#dee2e6;
 }
 
+.loadWorkout{
+    
+}
+
 .completed-check.btn-danger:hover {
     color: #fff;
     background-color: #b80d1e;
