@@ -15,8 +15,6 @@ class WorkoutTracker{
 		cancelButton.on('click',this.handleCancel);
 		editButton.on('click', this.editForms);
 		$('.student-edit-form').on('keypress', this.editForms);
-		// $('.loadWorkout').on('click', this.loadRecords);
-		// $('.saveWorkout').on('click', this.updateLocalStorageRecords)
 	}
 
 	loadRecords=()=>{
@@ -93,13 +91,13 @@ class WorkoutTracker{
 		}else{
 			$('.workoutCheck').hide();
 		}
-		if (isNaN(sets) || sets.length===0){
+		if (isNaN(sets) || sets.length===0 || sets > 10){
 			$('.setsCheck').show();
 			errorCount++
 		} else {
 			$('.setsCheck').hide();
 		}
-		if (isNaN(reps) || reps.length===0) {
+		if (isNaN(reps) || reps.length===0 || reps > 50) {
 			$('.repsCheck').show();
 			errorCount++
 		} else {

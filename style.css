@@ -54,3 +54,17 @@
 .offset-2.btn{
     width:70%;
 }
+
+.colorChange{
+    animation-name: restover;
+    animation-duration: 2s;
+    animation-iteration-count: 2;
+}
+
+@keyframes restover {
+  0%   {background-color:white}
+  25%  {background-color:#dc3545}
+  50%  {background-color: #007bff}
+  75%  {background-color:#dc3545}
+  100% {background-color:white}
+}

@@ -63,7 +63,7 @@ class WorkoutRecord{
 			if(classes[i] === 'minus'){
 				this.data.sets > 0 ? (this.data.sets--) : this.data.sets = 0
 			}else if(classes[i]==='add'){
-				if(!this.data.sets){
+				if(!this.data.sets && this.data.complete === "Complete"){
 					this.domElements.checkBox.click();
 				}
 				this.data.sets++;

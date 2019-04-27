@@ -20,12 +20,20 @@ function startTimer() {
     }
     
     if(presentTime==="0:00"){
-        if(workoutList.model.records.length > 0){
-            workoutList.model.records[0].minusIcon.click();
+        if (workoutList.model.records.length > 0) {
+            for (let i = 0; i < workoutList.model.records.length; i++) {
+                if(workoutList.model.records[i].data.complete === "Incomplete"){
+                    workoutList.model.records[i].minusIcon.click();
+                    break;
+                }
+            }
         }
         timerFlag=false;
-        alert('REST TIME OVER!');
+        $('body').addClass('colorChange');
         resetTimer();
+        setTimeout(()=>{
+            $('body').removeClass('colorChange')
+        },2000)
     }
 }
 
