@@ -15,8 +15,8 @@ class WorkoutTracker{
 		cancelButton.on('click',this.handleCancel);
 		editButton.on('click', this.editForms);
 		$('.student-edit-form').on('keypress', this.editForms);
-		$('.loadWorkout').on('click', this.loadRecords);
-		$('.saveWorkout').on('click', this.updateLocalStorageRecords)
+		// $('.loadWorkout').on('click', this.loadRecords);
+		// $('.saveWorkout').on('click', this.updateLocalStorageRecords)
 	}
 
 	loadRecords=()=>{
@@ -73,7 +73,8 @@ class WorkoutTracker{
 			for(var i = 0; i < this.model.records.length; i++){
 				if(editID === this.model.records[i].data.id){
 					this.model.records[i].update('workoutName', workoutName);
-					this.model.records[i].data.sets=sets;
+					this.model.records[i].data.sets=parseInt(sets);
+					this.model.records[i].data.defaultSets=parseInt(sets);
 					this.model.records[i].update('reps', reps);
 					break;
 				}

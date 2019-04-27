@@ -15,7 +15,7 @@
         font-size: .7rem;
     }
     .btn{
-        padding: .25rem .5rem;
+        padding: .25rem .25rem;
         font-size: .875rem;
         line-height: 1.5;
         border-radius: .2rem;
@@ -45,12 +45,12 @@
     border-bottom:1px solid#dee2e6;
 }
 
-.loadWorkout{
-    
-}
-
 .completed-check.btn-danger:hover {
     color: #fff;
     background-color: #b80d1e;
     border-color: #b80d1e;
+}
+
+.offset-2.btn{
+    width:70%;
 }

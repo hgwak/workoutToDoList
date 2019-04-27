@@ -37,8 +37,8 @@ class WorkoutRecord{
 
 	toggleComplete=(event)=>{
 		this.data.sets = 0;
-		this.domElements.sets.off('click');
-		$(this.domElements.sets).text(this.data.sets).append(this.addIcon)
+		// this.domElements.sets.off('click');
+		$(this.domElements.sets).text(this.data.sets).append(this.minusIcon).append(this.addIcon)
 		this.countCallback();
 		let targetElement = event.currentTarget.parentElement;
 		targetElement.nextElementSibling.classList.toggle("strikeout");
@@ -57,14 +57,23 @@ class WorkoutRecord{
 		}
 	}
 
-	completeSets=()=>{
-		this.data.sets > 0 ? (this.data.sets--) : this.data.sets = 0;
-		if(!this.data.sets){
-			this.domElements.sets.off('click');
+	completeSets=(event)=>{
+		let classes = event.currentTarget.classList;
+		for(let i = 0; i < classes.length; i++){
+			if(classes[i] === 'minus'){
+				this.data.sets > 0 ? (this.data.sets--) : this.data.sets = 0
+			}else if(classes[i]==='add'){
+				if(!this.data.sets){
+					this.domElements.checkBox.click();
+				}
+				this.data.sets++;
+			}
+		}
+		if(!this.data.sets && this.data.complete === "Incomplete"){
 			this.domElements.checkBox.click();
 		}
 		this.countCallback();
-		$(this.domElements.sets).text(this.data.sets).append(this.addIcon)
+		$(this.domElements.sets).text(this.data.sets).append(this.minusIcon).append(this.addIcon)
 	}
 	
 
@@ -74,10 +83,12 @@ class WorkoutRecord{
 		this.domElements.checkBox = $('<button>').addClass('btn btn-danger completed-check').text(this.data.complete).on('click', this.toggleComplete);
 		this.domElements.checkBoxHolder = $('<td>').addClass('d-flex justify-content-center col').append(this.domElements.checkBox)
 		this.domElements.name = $('<td>').addClass('text-center').text(this.data.workoutName);
-		this.domElements.sets = $('<td>').addClass('text-center').text(this.data.sets).on('click', this.completeSetButton, this.completeSets);
-		this.completeSetButton = $('<button>').addClass('btn btn-primary btn-sm completeSetButton ml-1');
-		this.addIcon = this.completeSetButton.append('<i class="fas fa-minus"></i>')
-		this.domElements.sets = this.domElements.sets.append(this.addIcon);
+		this.completeSetButton = $('<button>').addClass('btn btn-primary minus btn-sm completeSetButton ml-1');
+		this.domElements.sets = $('<td>').addClass('text-center').text(this.data.sets).on('click', 'button', this.completeSets);
+		this.minusIcon = this.completeSetButton.append('<i class="fas fa-minus"></i>')
+		this.addSetButton = $('<button>').addClass('btn btn-primary btn-sm add completeSetButton ml-1');
+		this.addIcon = this.addSetButton.append('<i class="fas fa-plus"></i>')
+		this.domElements.sets = this.domElements.sets.append(this.minusIcon).append(this.addIcon)
 		this.domElements.reps = $('<td>').addClass('text-center').text(this.data.reps);
 		this.deleteButtonSection = $('<td>').addClass('d-flex justify-content-center');
 		this.deleteButtonDOM = $('<button>').addClass('btn btn-danger').text('X');

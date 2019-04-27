@@ -20,8 +20,11 @@ function startTimer() {
     }
     
     if(presentTime==="0:00"){
-        alert('REST TIME OVER!')
+        if(workoutList.model.records.length > 0){
+            workoutList.model.records[0].minusIcon.click();
+        }
         timerFlag=false;
+        alert('REST TIME OVER!');
         resetTimer();
     }
 }
