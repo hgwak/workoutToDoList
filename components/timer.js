@@ -7,7 +7,7 @@ function startTimer() {
     var s = checkSecond((timeArray[1] - 1));
     if (s == 59) { m = m - 1 }
     $('.timer').text(m + ":" + s);
-    
+    pauseFlag = false;
     if(presentTime!=="0:00"){
         setTimeout(function(){
             if (pauseFlag) {
@@ -34,7 +34,7 @@ function checkSecond(sec) {
 
 function resetTimer(){
     pauseFlag=true;
-    $('.timer').text(defaultTime)
+    $('.timer').text(defaultTime);
     $('.startStop').text('Start');
 }
 

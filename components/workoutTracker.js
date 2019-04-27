@@ -23,7 +23,7 @@ class WorkoutTracker{
 		let localStorageRecords = JSON.parse(localStorage.records)
 		if(!!localStorageRecords && localStorageRecords.length !== this.model.records.length){
 			localStorageRecords.forEach((item) => {
-				this.model.add(item.data.workoutName, item.data.sets, item.data.reps)
+				this.model.add(item.data.workoutName, item.data.defaultSets, item.data.reps)
 			})
 		}
 		this.displayAll();

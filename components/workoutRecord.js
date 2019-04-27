@@ -3,6 +3,7 @@ class WorkoutRecord{
 		this.data = {
 			id: id,
 			workoutName: workoutName,
+			defaultSets: parseInt(sets),
 			sets: parseInt(sets),
 			reps: parseInt(reps),
 			complete: "Incomplete"
