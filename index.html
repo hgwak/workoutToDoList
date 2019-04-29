@@ -169,9 +169,7 @@
             </div>
         </div>
     </div>
-    <!-- data-toggle="modal" data-target="#addWorkout" -->
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#saveList">Save Test</button> -->
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="saveList">
+    <div class="modal fade" tabindex="-1" role="dialog" id="saveList">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
@@ -181,16 +179,29 @@
                     </button>
                 </div>
                 <div class="modal-body save-click-handler">
-                    <button type="button" class="btn btn-primary btn-block">Workout 1</button>
-                    <button type="button" class="btn btn-primary btn-block">Workout 2</button>
-                    <button type="button" class="btn btn-primary btn-block">Workout 3</button>
-                    <button type="button" class="btn btn-primary btn-block">Workout 4</button>
+                    <button type="button" class="btn btn-primary btn-block workout1">Workout 1</button>
+                    <button type="button" class="btn btn-primary btn-block workout2">Workout 2</button>
+                    <button type="button" class="btn btn-primary btn-block workout3">Workout 3</button>
+                    <button type="button" class="btn btn-primary btn-block workout4">Workout 4</button>
+                    <form class="saveWorkoutName" onsubmit="return false">
+                        <div class="form-row align-items-center">
+                            <div class="col-9">
+                                <label class="sr-only" for="saveWorkoutNameText">Workout Name</label>
+                                <input type="text" class="form-control mb-2" id="saveWorkoutNameText" placeholder="Workout Name" required>
+                                <div class="invalid-feedback saveWorkoutFeedback">
+                                    Name must be at least 2 letters
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-primary mb-2 saveTextButton">Save</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loadList">Load Test</button> -->
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="loadList">
+    <div class="modal fade" tabindex="-1" role="dialog" id="loadList">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
@@ -200,10 +211,10 @@
                     </button>
                 </div>
                 <div class="modal-body load-click-handler">
-                    <button type="button" class="btn btn-primary btn-block">Workout 1</button>
-                    <button type="button" class="btn btn-primary btn-block">Workout 2</button>
-                    <button type="button" class="btn btn-primary btn-block">Workout 3</button>
-                    <button type="button" class="btn btn-primary btn-block">Workout 4</button>
+                    <button type="button" class="btn btn-primary btn-block workout1">Workout 1</button>
+                    <button type="button" class="btn btn-primary btn-block workout2">Workout 2</button>
+                    <button type="button" class="btn btn-primary btn-block workout3">Workout 3</button>
+                    <button type="button" class="btn btn-primary btn-block workout4">Workout 4</button>
                 </div>
             </div>
         </div>

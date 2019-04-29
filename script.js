@@ -17,6 +17,18 @@ function startApp() {
     });
     workoutList.addEventHandlers();
     addEventHandlers();
+    loadWorkoutNames();
+}
+
+function loadWorkoutNames(){
+    let workoutNames = JSON.parse(localStorage['workoutNames']);
+    let workout;
+    for(workout in workoutNames){
+        if(workoutNames[workout] !== null){
+            let workoutNameClass = '.' + workout;
+            $(workoutNameClass).text(workoutNames[workout]);
+        }
+    }
 }
 
 function addEventHandlers(){
@@ -33,30 +45,59 @@ function addEventHandlers(){
     $('.reset').on('click', resetTimer);
     $('.dropdown-item').on('click', setTimer)
     $('.load-click-handler').on('click','button', loadWorkout);
-    $('.save-click-handler').on('click','button', saveWorkout);
+    $('.save-click-handler').on('click','.btn-block', saveWorkout);
+    $('.saveTextButton').on('click', saveWorkoutName);
 }
 
-function loadWorkout(){
+function loadWorkout(event){
     workoutList.model.records = [];
-    let workout = $(this).text();
-    let localStorageRecords = JSON.parse(localStorage[workout])
-    if (!!localStorageRecords && localStorageRecords.length !== workoutList.model.records.length) {
-        localStorageRecords.forEach((item) => {
-            workoutList.model.add(item.data.workoutName, item.data.defaultSets, item.data.reps)
+    let workout = event.currentTarget.classList[3];
+    if(localStorage[workout]!== undefined){
+        let localStorageRecords = JSON.parse(localStorage[workout])
+        if (!!localStorageRecords && localStorageRecords.length !== workoutList.model.records.length) {
+            localStorageRecords.forEach((item) => {
+                workoutList.model.add(item.data.workoutName, item.data.defaultSets, item.data.reps)
+            })
+        }
+        workoutList.displayAll();
+        $('.close').click();
+    }    
+}
+
+function saveWorkout(event){
+    if(workoutList.model.records.length > 0){
+        currentTarget = event.currentTarget.classList[3];
+        $('.save-click-handler > button').hide();
+        $('.saveWorkoutName').show();
+        localStorage[currentTarget] = JSON.stringify(workoutList.model.records);
+    }
+}
+
+function saveWorkoutName(){
+    let workoutText = $('#saveWorkoutNameText').val();
+    let currentTargetClass = '.' + currentTarget;
+    $(currentTargetClass).text(workoutText);
+    if(localStorage['workoutNames'] === undefined){
+        localStorage['workoutNames'] = JSON.stringify({
+            'workout1':null,
+            'workout2':null,
+            'workout3':null,
+            'workout4':null
         })
     }
-    workoutList.displayAll();
+    let parseLocalStorage = JSON.parse(localStorage['workoutNames']);
+    parseLocalStorage[currentTarget] = workoutText;
+    localStorage['workoutNames'] = JSON.stringify(parseLocalStorage);
     $('.close').click();
+    setTimeout(()=>{
+        $('.saveWorkoutName').hide();
+        $('.save-click-handler > button').show();
+        $('#saveWorkoutNameText').val('');
+    },0)
 }
 
-function saveWorkout(){
-    if(workoutList.model.records.length > 0){
-        let workout = $(this).text();
-        localStorage[workout] = JSON.stringify(workoutList.model.records)
-        $('.close').click();
-    }
-}
 
+var currentTarget;
 var editID;
 var pauseFlag = false;
 var timerFlag = false;

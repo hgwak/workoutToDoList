@@ -68,3 +68,7 @@
   75%  {background-color:#dc3545}
   100% {background-color:white}
 }
+
+.saveWorkoutName{
+    display:none;
+}

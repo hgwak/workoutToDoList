@@ -27,10 +27,6 @@ class WorkoutTracker{
 		this.displayAll();
 	}
 
-	updateLocalStorageRecords = () => {
-		localStorage.records = JSON.stringify(this.model.records);
-	}
-
 	clearInputs=()=>{
 		this.elementConfig.workoutNameInput.val('');
 		this.elementConfig.setsInput.val('');
