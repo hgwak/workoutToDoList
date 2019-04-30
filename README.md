@@ -1,1 +1,1 @@
-# workoutToDoList
+Provides a list of exercises for you to keep track of as you workout.

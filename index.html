@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script type="text/javascript" src="components/workoutRecord.js"></script>
+    <script type="text/javascript" src="components/workoutListHolder.js"></script>
+    <script type="text/javascript" src="components/workoutTracker.js"></script>
+    <script type="text/javascript" src="components/timer.js"></script>
+    <script src="script.js"></script>
+    <link rel="icon" href="icons8-dumbbell-50.png" type="image/gif" sizes="16x16">
+    <meta name="viewport" content="initial-scale=1, user-scalable=no">
+</head>
+
+<body>
+    <div class="page-header media-heading col">
+        <br>
+        <h1 class="text-center">Workout Tracker</h1>
+        <h5 class="text-center h4">Number of Sets Left: <span class="totalSets h4">0</span></h5>
+            <div class="dropdown">
+                <div class="text-center h5">Rest Timer: 
+                <button class="btn btn-dark timer dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown">
+                    3:00
+                </button>
+                <button type="button" class="startStop btn btn-primary">Start</button>
+                <button type="button" class="reset btn btn-danger">Reset</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" type="button">1:00</button>
+                    <button class="dropdown-item" type="button">2:00</button>
+                    <button class="dropdown-item" type="button">3:00</button>
+                    <button class="dropdown-item" type="button">4:00</button>
+                    <button class="dropdown-item" type="button">5:00</button>
+                </div>
+            </div>     
+        </div>
+    </div>
+    <div class="confirm-save text-center">
+        Workout has been saved!
+    </div>
+    <table class="table col-lg-8 offset-lg-2">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Completed</th>
+                <th scope="col" class="text-center">Workout</th>
+                <th scope="col" class="text-center">Sets</th>
+                <th scope="col" class="text-center">Reps</th>
+                <th scope="col" class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="displayArea">
+        </tbody>
+    </table>
+    <div class="col-8 offset-2">
+        <button type="button" class="btn offset-2 btn-primary btn-block" data-toggle="modal" data-target="#addWorkout">Add Workout</button>
+        <button type="button" class='btn btn-info offset-2 btn-block loadWorkout' data-toggle="modal" data-target="#loadList">Load Workout</button>
+        <button type="button" class='btn btn-success offset-2 btn-block saveWorkout mb-2' data-toggle="modal" data-target="#saveList">Save Workout</button>
+    </div>
+    <div class="modal fade" id="addWorkout" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Add Exercise</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="student-add-form col-lg-8 offset-lg-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user"> </span>
+                            </span>
+                            <input type="text" class="form-control form-rounded" name="workoutName" id="workoutName"
+                                placeholder="Workout Name" required>
+                                <div class="invalid-feedback workoutCheck">
+                                    Please enter more than 2 letters.
+                                </div>
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-list-alt"> </span>
+                            </span>
+                            <input type="text" autocomplete="off" class="form-control form-rounded" name="sets" id="sets" placeholder="# of Sets" required>
+                            <div class="invalid-feedback setsCheck">
+                                Please enter a number up to 10.
+                            </div>
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-education"> </span>
+                            </span>
+                            <input type="text" class="form-control form-rounded" name="reps" id="reps"
+                                placeholder="# of Reps" required>
+                                <div class="invalid-feedback repsCheck">
+                                    Please enter a number up to 50.
+                                </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="cancel btn btn-danger cancelButton">Clear</button>
+                    <button type="button" class="btn btn-primary" id="addButton">Add Workout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editWorkout" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Edit Exercise</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="student-edit-form col-lg-8 offset-lg-2">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user"> </span>
+                            </span>
+                            <input type="text" class="form-control form-rounded" name="editWorkoutName" id="editWorkoutName"
+                                placeholder="Workout Name" required>
+                            <div class="invalid-feedback workoutCheck">
+                                Please enter more than 2 letters.
+                            </div>
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-list-alt"> </span>
+                            </span>
+                            <input type="text" autocomplete="off" class="form-control form-rounded" name="editSets" id="editSets"
+                                placeholder="# of Sets" required>
+                            <div class="invalid-feedback setsCheck">
+                                Please enter a number.
+                            </div>
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-education"> </span>
+                            </span>
+                            <input type="text" class="form-control form-rounded" name="editReps" id="editReps"
+                                placeholder="# of Reps" required>
+                            <div class="invalid-feedback repsCheck">
+                                Please enter a number.
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="cancel btn btn-danger cancelButton">Clear</button>
+                    <button type="button" class="btn btn-primary" id="editButton">Finish Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="saveList">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Save Workout</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body save-click-handler">
+                    <button type="button" class="btn btn-primary btn-block workout1">Workout 1</button>
+                    <button type="button" class="btn btn-primary btn-block workout2">Workout 2</button>
+                    <button type="button" class="btn btn-primary btn-block workout3">Workout 3</button>
+                    <button type="button" class="btn btn-primary btn-block workout4">Workout 4</button>
+                    <form class="saveWorkoutName" onsubmit="return false">
+                        <div class="form-row align-items-center">
+                            <div class="col-9">
+                                <label class="sr-only" for="saveWorkoutNameText">Workout Name</label>
+                                <input type="text" class="form-control mb-2" id="saveWorkoutNameText" placeholder="Workout Name" required>
+                                <div class="invalid-feedback saveWorkoutFeedback">
+                                    Name must be at least 2 letters
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-primary mb-2 saveTextButton">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="loadList">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Load Workout</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body load-click-handler">
+                    <button type="button" class="btn btn-primary btn-block workout1">Workout 1</button>
+                    <button type="button" class="btn btn-primary btn-block workout2">Workout 2</button>
+                    <button type="button" class="btn btn-primary btn-block workout3">Workout 3</button>
+                    <button type="button" class="btn btn-primary btn-block workout4">Workout 4</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
