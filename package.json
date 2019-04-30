@@ -1,0 +1,25 @@
+{
+  "name": "workoutToDoList",
+  "version": "1.0.0",
+  "description": "Provides a list of exercises for you to keep track of as you workout.",
+  "main": "script.js",
+  "scripts": {
+    "build": "babel src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hgwak/workoutToDoList.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hgwak/workoutToDoList/issues"
+  },
+  "homepage": "https://github.com/hgwak/workoutToDoList#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0"
+  }
+}
