@@ -21,6 +21,9 @@ function startApp() {
 }
 
 function loadWorkoutNames(){
+    if(localStorage['workoutNames'] === undefined){
+        return;
+    }
     let workoutNames = JSON.parse(localStorage['workoutNames']);
     let workout;
     for(workout in workoutNames){
