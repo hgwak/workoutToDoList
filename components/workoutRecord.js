@@ -37,7 +37,6 @@ class WorkoutRecord{
 
 	toggleComplete=(event)=>{
 		this.data.sets = 0;
-		// this.domElements.sets.off('click');
 		$(this.domElements.sets).text(this.data.sets).append(this.minusIcon).append(this.addIcon)
 		this.countCallback();
 		let targetElement = event.currentTarget.parentElement;

@@ -47,6 +47,10 @@ function addEventHandlers(){
     $('.load-click-handler').on('click','button', loadWorkout);
     $('.save-click-handler').on('click','.btn-block', saveWorkout);
     $('.saveTextButton').on('click', saveWorkoutName);
+    $('#saveList').on('hide.bs.modal', function (e) {
+        $('.saveWorkoutName').hide();
+        $('.save-click-handler > button').show();
+    })
 }
 
 function loadWorkout(event){
@@ -59,6 +63,7 @@ function loadWorkout(event){
                 workoutList.model.add(item.data.workoutName, item.data.defaultSets, item.data.reps)
             })
         }
+        currentSelectedWorkout = workout;
         workoutList.displayAll();
         $('.close').click();
     }    
@@ -75,6 +80,11 @@ function saveWorkout(event){
 
 function saveWorkoutName(){
     let workoutText = $('#saveWorkoutNameText').val();
+    if(workoutText.length < 2 || !isNaN(workoutText)){
+        $('.saveWorkoutFeedback').show();
+        return;
+    }
+    $('.saveWorkoutFeedback').hide();
     let currentTargetClass = '.' + currentTarget;
     $(currentTargetClass).text(workoutText);
     if(localStorage['workoutNames'] === undefined){
@@ -88,15 +98,17 @@ function saveWorkoutName(){
     let parseLocalStorage = JSON.parse(localStorage['workoutNames']);
     parseLocalStorage[currentTarget] = workoutText;
     localStorage['workoutNames'] = JSON.stringify(parseLocalStorage);
+    $('.confirm-save').css({'visibility':'visible'})
     $('.close').click();
+    $('.saveWorkoutName').hide();
+    $('.save-click-handler > button').show();
+    $('#saveWorkoutNameText').val('');
     setTimeout(()=>{
-        $('.saveWorkoutName').hide();
-        $('.save-click-handler > button').show();
-        $('#saveWorkoutNameText').val('');
-    },0)
+        $('.confirm-save').css({'visibility':'hidden'})
+    },1500)
 }
 
-
+var currentSelectedWorkout;
 var currentTarget;
 var editID;
 var pauseFlag = false;

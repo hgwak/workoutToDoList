@@ -72,3 +72,8 @@
 .saveWorkoutName{
     display:none;
 }
+
+.confirm-save{
+    visibility:hidden;
+    color:#28a745;
+}

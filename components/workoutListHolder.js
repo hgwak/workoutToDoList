@@ -26,6 +26,7 @@ class WorkoutListHolder{
 				var currentWorkoutList = this.records[recordIndex].data.id;
 				if (remove_workout_id === currentWorkoutList) {
 					this.records.splice(recordIndex, 1);
+					localStorage[currentSelectedWorkout] = JSON.stringify(this.records);
 					return true;
 				}
 			}
