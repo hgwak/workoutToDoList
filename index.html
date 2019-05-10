@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <title>Workout Tracker</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,10 +16,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <script type="text/javascript" src="dist/components/workoutRecord.js"></script>
-    <script type="text/javascript" src="dist/components/workoutListHolder.js"></script>
-    <script type="text/javascript" src="dist/components/workoutTracker.js"></script>
-    <script type="text/javascript" src="dist/components/timer.js"></script>
+    <script type="text/javascript" src="src/components/workoutRecord.js"></script>
+    <script type="text/javascript" src="src/components/workoutListHolder.js"></script>
+    <script type="text/javascript" src="src/components/workoutTracker.js"></script>
+    <script type="text/javascript" src="src/components/timer.js"></script>
     <script src="src/script.js"></script>
     <link rel="icon" href="icons8-dumbbell-50.png" type="image/gif" sizes="16x16">
     <meta name="viewport" content="initial-scale=1, user-scalable=no">
@@ -62,10 +63,11 @@
         <tbody id="displayArea">
         </tbody>
     </table>
+    <div class="col mb-3 text-center empty-indicator">There are currently no exercises.</div>
     <div class="col-8 offset-2">
-        <button type="button" class="btn offset-2 btn-primary btn-block" data-toggle="modal" data-target="#addWorkout">Add Workout</button>
+        <button type="button" class="btn offset-2 btn-primary btn-block" data-toggle="modal" data-target="#addWorkout">Add Exercise</button>
         <button type="button" class='btn btn-info offset-2 btn-block loadWorkout' data-toggle="modal" data-target="#loadList">Load Workout</button>
-        <button type="button" class='btn btn-success offset-2 btn-block saveWorkout mb-2' data-toggle="modal" data-target="#saveList">Save Workout</button>
+        <button type="button" class='btn btn-success disabled offset-2 btn-block saveWorkout mb-2' data-toggle="modal" data-target="#saveList" disabled="true">Save Workout</button>
     </div>
     <div class="modal fade" id="addWorkout" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
         aria-hidden="true">

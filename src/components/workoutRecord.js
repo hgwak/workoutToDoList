@@ -120,6 +120,7 @@ class WorkoutRecord{
 			this.deleteCallback(this);
 			this.domElements.row.remove();
 			this.countCallback();
+			
 			return;
 		}else{
 			return;

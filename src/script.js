@@ -69,6 +69,11 @@ function loadWorkout(event){
         currentSelectedWorkout = workout;
         workoutList.displayAll();
         $('.close').click();
+        if (workoutList.model.records.length) {
+            $('.saveWorkout').removeAttr('disabled');
+            $('.saveWorkout').removeClass('disabled');
+            $('.empty-indicator').hide();
+        }
     }    
 }
 
@@ -76,6 +81,10 @@ function saveWorkout(event){
     if(workoutList.model.records.length > 0){
         currentTarget = event.currentTarget.classList[3];
         $('.save-click-handler > button').hide();
+        let local = JSON.parse(localStorage.workoutNames);
+        if(local[currentTarget]){
+            $('#saveWorkoutNameText').val(local[currentTarget])
+        }
         $('.saveWorkoutName').show();
         localStorage[currentTarget] = JSON.stringify(workoutList.model.records);
     }

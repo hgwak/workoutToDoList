@@ -43,6 +43,11 @@ class WorkoutTracker{
 	
 	handleAdd(event){
 		if(event.which===13 || event.type==='click'){
+			if (!this.model.records.length) {
+				$('.saveWorkout').removeAttr('disabled');
+				$('.saveWorkout').removeClass('disabled');
+				$('.empty-indicator').hide();
+			}
 			var workoutName = this.elementConfig.workoutNameInput.val();
 			var sets = this.elementConfig.setsInput.val();
 			var reps = this.elementConfig.repsInput.val();
