@@ -22,6 +22,8 @@ function startApp() {
 
 function loadWorkoutNames(){
     if(localStorage['workoutNames'] === undefined){
+        $('button.loadWorkout').addClass('disabled').attr('disabled','disabled');
+        $('.load-click-handler > button').addClass('disabled').attr('disabled','disabled')
         return;
     }
     let workoutNames = JSON.parse(localStorage['workoutNames']);
@@ -54,6 +56,22 @@ function addEventHandlers(){
         $('.saveWorkoutName').hide();
         $('.save-click-handler > button').show();
     })
+    $('.loadWorkout').on('click', checkSavedWorkoutNames)    
+}
+
+function checkSavedWorkoutNames(){
+    if(localStorage.workoutNames){
+        let local = JSON.parse(localStorage.workoutNames);
+        console.log(local)
+        for(let i in local){
+            if(local[i] !== null && (JSON.parse(localStorage[i])).length > 0){
+                $(".load-click-handler > " + '.'+ i).removeAttr('disabled').removeClass('disabled')
+            }else{
+                $(".load-click-handler > " + '.' + i).attr('disabled','disabled');
+                $(".load-click-handler > " + '.' + i).addClass('disabled')
+            }
+        }
+    }
 }
 
 function loadWorkout(event){
@@ -81,9 +99,11 @@ function saveWorkout(event){
     if(workoutList.model.records.length > 0){
         currentTarget = event.currentTarget.classList[3];
         $('.save-click-handler > button').hide();
-        let local = JSON.parse(localStorage.workoutNames);
-        if(local[currentTarget]){
-            $('#saveWorkoutNameText').val(local[currentTarget])
+        if (localStorage['workoutNames']) {
+            let local = JSON.parse(localStorage.workoutNames);
+            if (local[currentTarget]) {
+                $('#saveWorkoutNameText').val(local[currentTarget])
+            }
         }
         $('.saveWorkoutName').show();
         localStorage[currentTarget] = JSON.stringify(workoutList.model.records);
@@ -115,6 +135,7 @@ function saveWorkoutName(){
     $('.saveWorkoutName').hide();
     $('.save-click-handler > button').show();
     $('#saveWorkoutNameText').val('');
+    $('.loadWorkout').removeAttr('disabled').removeClass('disabled')
     setTimeout(()=>{
         $('.confirm-save').css({'visibility':'hidden'})
     },1500)
