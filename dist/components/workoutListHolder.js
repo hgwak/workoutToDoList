@@ -14,6 +14,12 @@ var WorkoutListHolder = function () {
 
 		_classCallCheck(this, WorkoutListHolder);
 
+		this.add = function (workoutName, sets, reps) {
+			var addWorkout = new WorkoutRecord(_this.getNextID(), workoutName, sets, reps, _this.remove, _this.countCallback, _this.editFormCallBack);
+			_this.records.push(addWorkout);
+			return _this.records.length;
+		};
+
 		this.calculateTotal = function () {
 			var sumSets = 0;
 			for (var arrayIndex = 0; arrayIndex < _this.records.length; arrayIndex++) {
@@ -40,13 +46,6 @@ var WorkoutListHolder = function () {
 			return this.currentID;
 		}
 	}, {
-		key: 'add',
-		value: function add(workoutName, sets, reps) {
-			var addWorkout = new WorkoutRecord(this.getNextID(), workoutName, sets, reps, this.remove, this.countCallback, this.editFormCallBack);
-			this.records.push(addWorkout);
-			return this.records.length;
-		}
-	}, {
 		key: 'remove',
 		value: function remove(removeWorkoutRecord) {
 			if ((typeof removeWorkoutRecord === 'undefined' ? 'undefined' : _typeof(removeWorkoutRecord)) !== 'object') {
@@ -58,6 +57,11 @@ var WorkoutListHolder = function () {
 					if (remove_workout_id === currentWorkoutList) {
 						this.records.splice(recordIndex, 1);
 						localStorage[currentSelectedWorkout] = JSON.stringify(this.records);
+						if (!this.records.length) {
+							$('.saveWorkout').attr('disabled', 'disabled');
+							$('.saveWorkout').addClass('disabled');
+							$('.empty-indicator').show();
+						}
 						return true;
 					}
 				}

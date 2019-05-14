@@ -37,9 +37,13 @@ var WorkoutRecord = function () {
 			$(event.target).text($(event.target).text() === "Incomplete" ? "Complete" : "Incomplete");
 			if ($(event.target).text() === "Complete") {
 				_this.data.complete = "Complete";
+				event.currentTarget.parentElement.parentElement.classList.remove('table-primary');
+				event.currentTarget.parentElement.parentElement.classList.add('table-dark');
 			} else {
 				_this.data.complete = "Incomplete";
 				targetElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.childNodes[0].setAttribute('data-toggle', 'modal');
+				event.currentTarget.parentElement.parentElement.classList.remove('table-dark');
+				//event.currentTarget.parentElement.parentElement.classList.add('table-dark');
 			}
 		};
 
@@ -48,6 +52,8 @@ var WorkoutRecord = function () {
 			for (var i = 0; i < classes.length; i++) {
 				if (classes[i] === 'minus') {
 					_this.data.sets > 0 ? _this.data.sets-- : _this.data.sets = 0;
+					event.currentTarget.parentElement.parentElement.classList.add('table-primary');
+					//let completeButtonText = event.currentTarget.parentElement.previousElementSibling.previousElementSibling.children[0].textContent
 				} else if (classes[i] === 'add') {
 					if (!_this.data.sets && _this.data.complete === "Complete") {
 						_this.domElements.checkBox.click();
@@ -84,7 +90,6 @@ var WorkoutRecord = function () {
 				_this.domElements.sets.addClass('strikeout');
 				_this.domElements.reps.addClass('strikeout');
 				_this.editButtonDOM.addClass('strikeout').removeAttr('data-toggle');
-				_this.domElements.sets.off('click');
 			}
 			_this.domElements.deleteButton = $(_this.deleteButtonSection).append(_this.editButtonDOM, _this.deleteButtonDOM);
 			_this.newTable = $(_this.domElements.row).append(_this.domElements.checkBoxHolder, _this.domElements.name, _this.domElements.sets, _this.domElements.reps, _this.domElements.deleteButton);
@@ -95,7 +100,7 @@ var WorkoutRecord = function () {
 		this.handleEdit = function () {
 			editID = _this.data.id;
 			$('#editWorkoutName').val(_this.data.workoutName);
-			$('#editSets').val(_this.data.sets);
+			$('#editSets').val(_this.data.defaultSets);
 			$('#editReps').val(_this.data.reps);
 		};
 

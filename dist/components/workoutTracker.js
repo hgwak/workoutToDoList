@@ -44,6 +44,13 @@ var WorkoutTracker = function () {
 						_this.model.records[i].data.sets = parseInt(sets);
 						_this.model.records[i].data.defaultSets = parseInt(sets);
 						_this.model.records[i].update('reps', reps);
+						if (localStorage[currentSelectedWorkout]) {
+							localStorage[currentSelectedWorkout] = JSON.stringify(workoutList.model.records);
+							$('.confirm-save').css({ 'visibility': 'visible' });
+							setTimeout(function () {
+								$('.confirm-save').css({ 'visibility': 'hidden' });
+							}, 1500);
+						}
 						break;
 					}
 				}
@@ -109,6 +116,11 @@ var WorkoutTracker = function () {
 		key: 'handleAdd',
 		value: function handleAdd(event) {
 			if (event.which === 13 || event.type === 'click') {
+				if (!this.model.records.length) {
+					$('.saveWorkout').removeAttr('disabled');
+					$('.saveWorkout').removeClass('disabled');
+					$('.empty-indicator').hide();
+				}
 				var workoutName = this.elementConfig.workoutNameInput.val();
 				var sets = this.elementConfig.setsInput.val();
 				var reps = this.elementConfig.repsInput.val();
