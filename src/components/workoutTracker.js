@@ -75,6 +75,9 @@ class WorkoutTracker{
 					this.model.records[i].data.sets=parseInt(sets);
 					this.model.records[i].data.defaultSets=parseInt(sets);
 					this.model.records[i].update('reps', reps);
+					if(localStorage[currentSelectedWorkout]){
+						localStorage[currentSelectedWorkout] = JSON.stringify(workoutList.model.records);
+					}
 					break;
 				}
 			}

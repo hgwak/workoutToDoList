@@ -62,7 +62,6 @@ function addEventHandlers(){
 function checkSavedWorkoutNames(){
     if(localStorage.workoutNames){
         let local = JSON.parse(localStorage.workoutNames);
-        console.log(local)
         for(let i in local){
             if(local[i] !== null && (JSON.parse(localStorage[i])).length > 0){
                 $(".load-click-handler > " + '.'+ i).removeAttr('disabled').removeClass('disabled')
