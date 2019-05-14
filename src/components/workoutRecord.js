@@ -48,11 +48,15 @@ class WorkoutRecord{
 		$(event.target).toggleClass('btn-primary');
 		$(event.target).toggleClass('btn-danger');
 		$(event.target).text($(event.target).text()==="Incomplete"? "Complete" : "Incomplete");
-		if($(event.target).text()=== "Complete"){
-			this.data.complete = "Complete"
+		if($(event.target).text() === "Complete"){
+			this.data.complete = "Complete";
+			event.currentTarget.parentElement.parentElement.classList.remove('table-primary');
+			event.currentTarget.parentElement.parentElement.classList.add('table-dark');
 		}else{
 			this.data.complete = "Incomplete"
 			targetElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.childNodes[0].setAttribute('data-toggle','modal');
+			event.currentTarget.parentElement.parentElement.classList.remove('table-dark');
+			//event.currentTarget.parentElement.parentElement.classList.add('table-dark');
 		}
 	}
 
@@ -60,7 +64,9 @@ class WorkoutRecord{
 		let classes = event.currentTarget.classList;
 		for(let i = 0; i < classes.length; i++){
 			if(classes[i] === 'minus'){
-				this.data.sets > 0 ? (this.data.sets--) : this.data.sets = 0
+				this.data.sets > 0 ? (this.data.sets--) : this.data.sets = 0;
+				event.currentTarget.parentElement.parentElement.classList.add('table-primary');
+				//let completeButtonText = event.currentTarget.parentElement.previousElementSibling.previousElementSibling.children[0].textContent
 			}else if(classes[i]==='add'){
 				if(!this.data.sets && this.data.complete === "Complete"){
 					this.domElements.checkBox.click();
@@ -99,7 +105,6 @@ class WorkoutRecord{
 			this.domElements.sets.addClass('strikeout');
 			this.domElements.reps.addClass('strikeout');
 			this.editButtonDOM.addClass('strikeout').removeAttr('data-toggle');
-			this.domElements.sets.off('click');
 		}
 		this.domElements.deleteButton = $(this.deleteButtonSection).append(this.editButtonDOM,this.deleteButtonDOM);
 		this.newTable = $(this.domElements.row).append(this.domElements.checkBoxHolder, this.domElements.name,this.domElements.sets, this.domElements.reps, this.domElements.deleteButton);
@@ -110,7 +115,7 @@ class WorkoutRecord{
 	handleEdit = () => {
 		editID = this.data.id;
 		$('#editWorkoutName').val(this.data.workoutName);
-		$('#editSets').val(this.data.sets);
+		$('#editSets').val(this.data.defaultSets);
 		$('#editReps').val(this.data.reps);
 	}
 

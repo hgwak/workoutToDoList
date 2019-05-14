@@ -11,7 +11,7 @@ class WorkoutListHolder{
 		return this.currentID;
 	}
 	
-	add( workoutName, sets, reps ){
+	add=( workoutName, sets, reps )=>{
 		var addWorkout = new WorkoutRecord(this.getNextID(), workoutName, sets, reps, this.remove, this.countCallback, this.editFormCallBack);
 		this.records.push(addWorkout);
 		return this.records.length;
@@ -27,6 +27,11 @@ class WorkoutListHolder{
 				if (remove_workout_id === currentWorkoutList) {
 					this.records.splice(recordIndex, 1);
 					localStorage[currentSelectedWorkout] = JSON.stringify(this.records);
+					if(!this.records.length){
+						$('.saveWorkout').attr('disabled','disabled');
+						$('.saveWorkout').addClass('disabled');
+						$('.empty-indicator').show();
+					}
 					return true;
 				}
 			}
