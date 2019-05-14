@@ -77,6 +77,10 @@ class WorkoutTracker{
 					this.model.records[i].update('reps', reps);
 					if(localStorage[currentSelectedWorkout]){
 						localStorage[currentSelectedWorkout] = JSON.stringify(workoutList.model.records);
+						$('.confirm-save').css({'visibility':'visible'})
+						setTimeout(() => {
+							$('.confirm-save').css({ 'visibility': 'hidden' })
+						}, 1500)
 					}
 					break;
 				}

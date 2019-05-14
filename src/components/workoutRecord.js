@@ -115,7 +115,7 @@ class WorkoutRecord{
 	handleEdit = () => {
 		editID = this.data.id;
 		$('#editWorkoutName').val(this.data.workoutName);
-		$('#editSets').val(this.data.sets);
+		$('#editSets').val(this.data.defaultSets);
 		$('#editReps').val(this.data.reps);
 	}
 
